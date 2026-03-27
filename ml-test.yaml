@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml
+  template:
+    metadata:
+      labels:
+        app: ml
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest   # ML risky
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"

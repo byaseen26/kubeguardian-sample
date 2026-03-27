@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bad-privileged
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bad
+  template:
+    metadata:
+      labels:
+        app: bad
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        securityContext:
+          privileged: true
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
